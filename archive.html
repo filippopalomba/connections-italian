@@ -76,9 +76,9 @@
       }
 
       function renderStars(avg, count) {
-        if (!count) return '<span class="muted">—</span>';
+        if (!count) return '<span class="stars-label">Difficoltà</span> <span class="muted">—</span>';
         const full = Math.round(avg);
-        return "★".repeat(full) + '<span class="muted">' + "★".repeat(5 - full) + " · " + avg.toFixed(1) + " (" + count + ")</span>";
+        return '<span class="stars-label">Difficoltà</span> ' + "★".repeat(full) + '<span class="muted">' + "★".repeat(5 - full) + " · " + avg.toFixed(1) + " (" + count + ")</span>";
       }
 
       container.innerHTML = "";

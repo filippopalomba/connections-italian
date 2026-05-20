@@ -291,7 +291,7 @@
     }
     widget.innerHTML =
       '<p class="rating-title">' + titleText + '</p>' +
-      '<div class="stars-row">' + starsHtml + "</div>" +
+      '<div class="stars-row"><span class="stars-label">Difficoltà</span>' + starsHtml + "</div>" +
       '<p class="rating-sub">' + avgText + "</p>";
 
     widget.querySelectorAll(".star").forEach(btn => {

@@ -437,7 +437,14 @@ a { color: var(--text); }
 }
 .stars-row {
   display: inline-flex;
-  gap: 4px;
+  align-items: center;
+  gap: 6px;
+}
+.stars-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--muted);
+  margin-right: 4px;
 }
 .star {
   background: none;

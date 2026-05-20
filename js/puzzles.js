@@ -2,187 +2,214 @@
 // Ogni puzzle ha 4 gruppi di difficoltà crescente:
 //   giallo (facile) → verde (medio) → blu (difficile) → viola (molto difficile)
 // Tutte le parole e i temi sono originali, non copiati da NYT Connections.
+// Stile: forti sovrapposizioni tra categorie, wordplay sul viola.
 
 window.PUZZLES = [
   {
-    date: "2026-05-19",
+    date: "2026-05-27",
+    number: 8,
+    groups: [
+      {
+        level: "yellow",
+        theme: "PARTI DEL TRONCO",
+        words: ["PETTO", "ADDOME", "VITA", "FIANCO"]
+      },
+      {
+        level: "green",
+        theme: "STRADE URBANE",
+        words: ["VIA", "VIALE", "VICOLO", "PIAZZA"]
+      },
+      {
+        level: "blue",
+        theme: "MODI INFORMALI DI CHIEDERE UN PO' DI VINO",
+        words: ["GOCCIO", "ASSAGGIO", "DITO", "BICCHIERINO"]
+      },
+      {
+        level: "purple",
+        theme: "NASCONDONO 'ORSO'",
+        words: ["MORSO", "SORSO", "DORSO", "CORSO"]
+      }
+    ]
+  },
+  {
+    date: "2026-05-26",
     number: 7,
     groups: [
       {
         level: "yellow",
-        theme: "TIPI DI PASTA",
-        words: ["PENNE", "FUSILLI", "FARFALLE", "RIGATONI"]
+        theme: "FRUTTI DI BOSCO",
+        words: ["MIRTILLO", "LAMPONE", "RIBES", "FRAGOLA"]
       },
       {
         level: "green",
-        theme: "STRUMENTI MUSICALI",
-        words: ["VIOLINO", "TROMBA", "ARPA", "FLAUTO"]
+        theme: "PARTI DI UN ALBERO",
+        words: ["TRONCO", "FOGLIA", "CORTECCIA", "RADICE"]
       },
       {
         level: "blue",
-        theme: "PESCI DI MARE",
-        words: ["TONNO", "SPIGOLA", "ORATA", "BRANZINO"]
+        theme: "SINONIMI DI 'AMORE'",
+        words: ["AFFETTO", "PASSIONE", "INFATUAZIONE", "COTTA"]
       },
       {
         level: "purple",
-        theme: "CAPOLUOGHI DI REGIONE",
-        words: ["ROMA", "MILANO", "TORINO", "BARI"]
+        theme: "ANAGRAMMI DI 'ROMA'",
+        words: ["MORA", "RAMO", "ORMA", "AMOR"]
       }
     ]
   },
   {
-    date: "2026-05-18",
+    date: "2026-05-25",
     number: 6,
     groups: [
       {
         level: "yellow",
-        theme: "COLORI DELL'ARCOBALENO",
-        words: ["ROSSO", "GIALLO", "VERDE", "BLU"]
+        theme: "ARTICOLAZIONI DEL CORPO",
+        words: ["GINOCCHIO", "GOMITO", "CAVIGLIA", "ANCA"]
       },
       {
         level: "green",
-        theme: "ANIMALI DA FATTORIA",
-        words: ["MUCCA", "MAIALE", "GALLINA", "PECORA"]
+        theme: "SINONIMI DI 'ROBUSTEZZA'",
+        words: ["VIGORE", "FORZA", "ENERGIA", "TEMPRA"]
       },
       {
         level: "blue",
-        theme: "BEVANDE CALDE",
-        words: ["CAFFÈ", "TÈ", "CIOCCOLATA", "TISANA"]
+        theme: "ARREDAMENTO DI CASA",
+        words: ["TENDA", "TAPPETO", "LAMPADA", "POLTRONA"]
       },
       {
         level: "purple",
-        theme: "___ DI PASQUA",
-        words: ["UOVO", "COLOMBA", "AGNELLO", "ISOLA"]
+        theme: "___ DI FERRO",
+        words: ["POLSO", "SALUTE", "PUGNO", "CORTINA"]
       }
     ]
   },
   {
-    date: "2026-05-17",
+    date: "2026-05-24",
     number: 5,
     groups: [
       {
         level: "yellow",
-        theme: "ORTAGGI",
-        words: ["CAROTA", "PATATA", "CIPOLLA", "CAVOLFIORE"]
+        theme: "PARTI DEL CORPO",
+        words: ["MANO", "PIEDE", "TESTA", "OCCHIO"]
       },
       {
         level: "green",
-        theme: "SINONIMI INFORMALI DI TESTA",
-        words: ["ZUCCA", "NOCE", "MELONE", "PERA"]
+        theme: "PARTI DI UNA CAMICIA",
+        words: ["COLLETTO", "MANICA", "POLSINO", "BOTTONE"]
       },
       {
         level: "blue",
-        theme: "UTENSILI DA CUCINA",
-        words: ["MESTOLO", "GRATTUGIA", "FRUSTA", "SCHIUMAROLA"]
+        theme: "PARTI DI UNA CHITARRA",
+        words: ["CASSA", "CORDA", "MANICO", "TASTIERA"]
       },
       {
         level: "purple",
-        theme: "GIOCHI DI CARTE ITALIANI",
-        words: ["SCOPA", "BRISCOLA", "RAMINO", "TRESETTE"]
+        theme: "___ DI BOTTIGLIA",
+        words: ["COLLO", "TAPPO", "ETICHETTA", "FONDO"]
       }
     ]
   },
   {
-    date: "2026-05-16",
+    date: "2026-05-23",
     number: 4,
     groups: [
       {
         level: "yellow",
-        theme: "FORMAGGI ITALIANI",
-        words: ["PARMIGIANO", "MOZZARELLA", "GORGONZOLA", "PECORINO"]
+        theme: "GIOCHI DA TAVOLO",
+        words: ["MONOPOLI", "RISIKO", "SCARABEO", "CLUEDO"]
       },
       {
         level: "green",
-        theme: "VINI ITALIANI",
-        words: ["CHIANTI", "BAROLO", "PROSECCO", "AMARONE"]
+        theme: "FIUMI ITALIANI",
+        words: ["TEVERE", "ARNO", "ADIGE", "PIAVE"]
       },
       {
         level: "blue",
-        theme: "PITTORI ITALIANI",
-        words: ["CARAVAGGIO", "BOTTICELLI", "TIZIANO", "MODIGLIANI"]
+        theme: "COMPOSITORI D'OPERA ITALIANI",
+        words: ["VERDI", "PUCCINI", "ROSSINI", "DONIZETTI"]
       },
       {
         level: "purple",
-        theme: "TARTARUGHE NINJA",
-        words: ["LEONARDO", "MICHELANGELO", "RAFFAELLO", "DONATELLO"]
+        theme: "___ NERO",
+        words: ["BUCO", "MERCATO", "OCCHIO", "CIGNO"]
       }
     ]
   },
   {
-    date: "2026-05-15",
+    date: "2026-05-22",
     number: 3,
     groups: [
       {
         level: "yellow",
-        theme: "ANIMALI DELLA SAVANA",
-        words: ["ELEFANTE", "GIRAFFA", "IPPOPOTAMO", "ZEBRA"]
+        theme: "PIZZE CLASSICHE",
+        words: ["MARGHERITA", "MARINARA", "CAPRICCIOSA", "DIAVOLA"]
       },
       {
         level: "green",
-        theme: "SEGNI ZODIACALI",
-        words: ["TORO", "GEMELLI", "LEONE", "BILANCIA"]
+        theme: "PRIMI PIATTI ROMANI",
+        words: ["CARBONARA", "AMATRICIANA", "GRICIA", "ARRABBIATA"]
       },
       {
         level: "blue",
-        theme: "MOBILI DI CASA",
-        words: ["SEDIA", "TAVOLO", "ARMADIO", "DIVANO"]
+        theme: "SCRITTORI ITALIANI DEL '900",
+        words: ["CALVINO", "MORAVIA", "PAVESE", "ECO"]
       },
       {
         level: "purple",
-        theme: "COSE CHE PUNGONO",
-        words: ["APE", "ORTICA", "AGO", "VESPA"]
+        theme: "SI POSSONO 'BATTERE'",
+        words: ["CASSA", "CHIODO", "MONETA", "DENTI"]
       }
     ]
   },
   {
-    date: "2026-05-14",
+    date: "2026-05-21",
     number: 2,
     groups: [
       {
         level: "yellow",
-        theme: "FRUTTI ROSSI",
-        words: ["FRAGOLA", "CILIEGIA", "LAMPONE", "MELOGRANO"]
+        theme: "PERSONAGGI DEI PROMESSI SPOSI",
+        words: ["RENZO", "LUCIA", "AGNESE", "ABBONDIO"]
       },
       {
         level: "green",
-        theme: "DOLCI ITALIANI",
-        words: ["TIRAMISÙ", "CANNOLO", "SFOGLIATELLA", "CASSATA"]
+        theme: "SINONIMI DI 'PAURA'",
+        words: ["TIMORE", "TERRORE", "PANICO", "FIFA"]
       },
       {
         level: "blue",
-        theme: "SPORT OLIMPICI",
-        words: ["NUOTO", "GINNASTICA", "SCHERMA", "TUFFI"]
+        theme: "VERBI DI MOVIMENTO LENTO",
+        words: ["ZOPPICARE", "ARRANCARE", "STRISCIARE", "TRASCINARSI"]
       },
       {
         level: "purple",
-        theme: "___ DI MILANO",
-        words: ["DUOMO", "NAVIGLIO", "PANETTONE", "RISOTTO"]
+        theme: "MODI DI DIRE 'MORIRE'",
+        words: ["CREPARE", "SCHIATTARE", "SPIRARE", "MANCARE"]
       }
     ]
   },
   {
-    date: "2026-05-13",
+    date: "2026-05-20",
     number: 1,
     groups: [
       {
         level: "yellow",
-        theme: "VERBI DEL CUCINARE",
-        words: ["TAGLIARE", "FRIGGERE", "BOLLIRE", "ARROSTIRE"]
+        theme: "TIPI DI CAFFÈ AL BAR",
+        words: ["RISTRETTO", "MACCHIATO", "CORRETTO", "LUNGO"]
       },
       {
         level: "green",
-        theme: "TIPI DI PANE",
-        words: ["FOCACCIA", "BAGUETTE", "CIABATTA", "MICHETTA"]
+        theme: "AGGETTIVI PER UN AVARO",
+        words: ["TIRCHIO", "SPILORCIO", "TACCAGNO", "GRETTO"]
       },
       {
         level: "blue",
-        theme: "PARTI DELLA CASA",
-        words: ["TETTO", "MURO", "FINESTRA", "PORTA"]
+        theme: "MARI CHE BAGNANO L'ITALIA",
+        words: ["ADRIATICO", "IONIO", "LIGURE", "TIRRENO"]
       },
       {
         level: "purple",
-        theme: "CALCIATORI ITALIANI LEGGENDARI",
-        words: ["TOTTI", "BAGGIO", "PIRLO", "BUFFON"]
+        theme: "___ DI MARE",
+        words: ["CAVALLUCCIO", "CETRIOLO", "STELLA", "RICCIO"]
       }
     ]
   }
