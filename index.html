@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connessioni Italiane — Il rompicapo quotidiano in italiano</title>
+  <meta name="description" content="Connessioni Italiane: un rompicapo quotidiano in italiano dove devi raggruppare 16 parole in 4 categorie. Una nuova sfida ogni giorno." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Connessioni Italiane</a>
+    <nav>
+      <a href="index.html" class="active">Oggi</a>
+      <a href="archive.html">Archivio</a>
+    </nav>
+    <div id="user-area"></div>
+  </header>
+
+  <div id="toast" class="toast"></div>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Crea quattro gruppi di quattro!</h1>
+      <p class="subtitle">Raggruppa le 16 parole in 4 categorie. Attenzione alle insidie.</p>
+      <p class="puzzle-meta">
+        Puzzle <span id="puzzle-number">—</span> · <span id="puzzle-date">—</span>
+      </p>
+    </section>
+
+    <div id="banner"></div>
+
+    <div id="game-root" class="game-wrapper">
+      <div id="solved-rows" class="solved-rows"></div>
+      <div id="grid" class="grid"></div>
+
+      <div class="mistakes">
+        <span>Errori rimasti:</span>
+        <span id="mistake-dots" class="mistake-dots"></span>
+      </div>
+
+      <div class="actions">
+        <button id="btn-shuffle" class="btn">Mescola</button>
+        <button id="btn-deselect" class="btn">Deseleziona</button>
+        <button id="btn-submit" class="btn primary">Invia</button>
+      </div>
+    </div>
+
+    <section class="how-to">
+      <h3>Come si gioca</h3>
+      <ul>
+        <li>Sulla griglia ci sono 16 parole, che si raggruppano in 4 categorie da 4.</li>
+        <li>Seleziona quattro parole che pensi appartengano alla stessa categoria e premi <strong>Invia</strong>.</li>
+        <li>Hai a disposizione 4 errori. Attenzione: alcune parole possono sembrare appartenere a più gruppi.</li>
+        <li>Le categorie hanno difficoltà crescente: <span style="background:var(--yellow);padding:2px 8px;border-radius:4px;">giallo</span> <span style="background:var(--green);padding:2px 8px;border-radius:4px;">verde</span> <span style="background:var(--blue);padding:2px 8px;border-radius:4px;">blu</span> <span style="background:var(--purple);padding:2px 8px;border-radius:4px;">viola</span>.</li>
+        <li>Un nuovo puzzle ogni giorno. <a href="archive.html">Visita l'archivio</a> per giocare ai puzzle precedenti.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <strong>Disclaimer.</strong> Questo sito è un progetto indipendente e <strong>non è in alcun modo affiliato, sponsorizzato o approvato dal New York Times</strong> né dal gioco "Connections". Tutti i puzzle, le parole e le categorie qui presenti sono originali, creati appositamente per questo sito.
+    </p>
+    <p>© Connessioni Italiane</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/puzzles.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

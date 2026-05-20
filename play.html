@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connessioni Italiane — Gioca</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Connessioni Italiane</a>
+    <nav>
+      <a href="index.html">Oggi</a>
+      <a href="archive.html">Archivio</a>
+    </nav>
+    <div id="user-area"></div>
+  </header>
+
+  <div id="toast" class="toast"></div>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Crea quattro gruppi di quattro!</h1>
+      <p class="puzzle-meta">
+        Puzzle <span id="puzzle-number">—</span> · <span id="puzzle-date">—</span>
+      </p>
+    </section>
+
+    <div id="banner"></div>
+
+    <div id="game-root" class="game-wrapper">
+      <div id="solved-rows" class="solved-rows"></div>
+      <div id="grid" class="grid"></div>
+
+      <div class="mistakes">
+        <span>Errori rimasti:</span>
+        <span id="mistake-dots" class="mistake-dots"></span>
+      </div>
+
+      <div class="actions">
+        <button id="btn-shuffle" class="btn">Mescola</button>
+        <button id="btn-deselect" class="btn">Deseleziona</button>
+        <button id="btn-submit" class="btn primary">Invia</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <strong>Disclaimer.</strong> Questo sito non è in alcun modo affiliato, sponsorizzato o approvato dal New York Times o dal gioco "Connections". Tutti i puzzle e le parole sono originali.
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/puzzles.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/achievements.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accedi — Connessioni Italiane</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Connessioni Italiane</a>
+    <nav>
+      <a href="index.html">Oggi</a>
+      <a href="archive.html">Archivio</a>
+    </nav>
+    <div id="user-area"></div>
+  </header>
+
+  <main class="container">
+    <div id="cloud-note"></div>
+
+    <div class="auth-card">
+      <h2>Accedi</h2>
+      <form id="login-form">
+        <div class="form-row">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" name="username" autocomplete="username" required />
+        </div>
+        <div class="form-row">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" autocomplete="current-password" required />
+        </div>
+        <div class="form-error" id="login-error"></div>
+        <button type="submit" class="btn primary">Accedi</button>
+      </form>
+      <p class="auth-alt">
+        Non hai un account? <a href="signup.html">Registrati</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <strong>Disclaimer.</strong> Sito indipendente, non affiliato al New York Times o al gioco "Connections".
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    if (!window.cloud || !window.cloud.ready) {
+      document.getElementById("cloud-note").innerHTML =
+        '<div class="cloud-disabled-note">' +
+          'L\'autenticazione non è ancora configurata. Apri <code>js/config.js</code> e inserisci le credenziali Supabase.' +
+        '</div>';
+    } else {
+      window.bindLoginForm("login-form", "login-error");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connessioni Italiane — Archivio</title>
+  <meta name="description" content="Tutti i puzzle delle Connessioni Italiane: gioca a quelli che hai perso o rigioca quelli passati." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Connessioni Italiane</a>
+    <nav>
+      <a href="index.html">Oggi</a>
+      <a href="archive.html" class="active">Archivio</a>
+    </nav>
+    <div id="user-area"></div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Archivio dei puzzle</h1>
+      <p class="subtitle">Gioca i puzzle dei giorni passati. Il tuo progresso viene salvato.</p>
+    </section>
+
+    <div id="archive-list" class="archive-list"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <strong>Disclaimer.</strong> Questo sito è un progetto indipendente e non è in alcun modo affiliato, sponsorizzato o approvato dal New York Times o dal gioco "Connections". Tutti i puzzle e le parole sono originali.
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/puzzles.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/game.js"></script>
+  <script>
+    (async function () {
+      const today = window.getTodayPuzzle();
+      const puzzles = [today].concat(window.getArchivePuzzles());
+      const container = document.getElementById("archive-list");
+
+      // Optionally fetch cloud progress (for logged-in users) and ratings
+      let cloudProgressByDate = {};
+      let ratingsByDate = {};
+      if (window.cloud && window.cloud.ready) {
+        // Give Supabase a moment to restore session
+        await new Promise(r => setTimeout(r, 200));
+        const dates = puzzles.map(p => p.date);
+        try {
+          ratingsByDate = await window.cloud.getRatingSummariesForDates(dates);
+        } catch (e) {}
+        if (window.cloud.user) {
+          try {
+            const all = await window.cloud.listAllProgress();
+            all.forEach(p => { cloudProgressByDate[p.puzzle_date] = p; });
+          } catch (e) {}
+        }
+      }
+
+      function progressFor(date) {
+        const cloud = cloudProgressByDate[date];
+        if (cloud) {
+          return {
+            done: !!cloud.done,
+            result: cloud.result,
+            mistakes: cloud.mistakes,
+            solvedLevels: cloud.solved_levels,
+          };
+        }
+        return window.getProgress(date);
+      }
+
+      function renderStars(avg, count) {
+        if (!count) return '<span class="muted">—</span>';
+        const full = Math.round(avg);
+        return "★".repeat(full) + '<span class="muted">' + "★".repeat(5 - full) + " · " + avg.toFixed(1) + " (" + count + ")</span>";
+      }
+
+      container.innerHTML = "";
+      puzzles.forEach(p => {
+        const progress = progressFor(p.date);
+        let status = "Non iniziato";
+        let statusClass = "";
+        if (progress) {
+          if (progress.done && progress.result === "win") {
+            status = "Completato";
+            statusClass = "done";
+          } else if (progress.done && progress.result === "lose") {
+            status = "Non riuscito";
+            statusClass = "failed";
+          } else if ((progress.solvedLevels || []).length > 0 || progress.mistakes > 0) {
+            status = "In corso";
+            statusClass = "partial";
+          }
+        }
+
+        const rating = ratingsByDate[p.date];
+        const ratingHtml = rating
+          ? '<div class="rating-stars">' + renderStars(rating.avg, rating.count) + '</div>'
+          : '';
+
+        const card = document.createElement("a");
+        card.className = "archive-card";
+        card.href = "play.html?date=" + encodeURIComponent(p.date);
+        card.innerHTML =
+          '<div>' +
+            '<div class="num">Puzzle #' + p.number + (p.date === today.date ? ' · Oggi' : '') + '</div>' +
+            '<div class="date">' + window.formatItalianDate(p.date) + '</div>' +
+            ratingHtml +
+          '</div>' +
+          '<span class="status ' + statusClass + '">' + status + '</span>';
+        container.appendChild(card);
+      });
+    })();
+  </script>
+</body>
+</html>

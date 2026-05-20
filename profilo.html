@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profilo — Connessioni Italiane</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Connessioni Italiane</a>
+    <nav>
+      <a href="index.html">Oggi</a>
+      <a href="archive.html">Archivio</a>
+    </nav>
+    <div id="user-area"></div>
+  </header>
+
+  <main class="container">
+    <div id="profile-root">
+      <p style="text-align:center;color:var(--muted);padding:40px 0;">Caricamento…</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <strong>Disclaimer.</strong> Sito indipendente, non affiliato al New York Times o al gioco "Connections".
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/puzzles.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/achievements.js"></script>
+  <script>
+    (function () {
+      const root = document.getElementById("profile-root");
+
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, c => ({
+          "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+        }[c]));
+      }
+
+      function renderNotLoggedIn() {
+        root.innerHTML =
+          '<div class="auth-card">' +
+            '<h2>Accedi per vedere il tuo profilo</h2>' +
+            '<p class="auth-alt">' +
+              '<a class="btn primary" style="display:inline-block;margin-top:8px;text-decoration:none;" href="login.html">Accedi</a> ' +
+              '<a class="btn" style="display:inline-block;margin-top:8px;margin-left:8px;text-decoration:none;" href="signup.html">Registrati</a>' +
+            '</p>' +
+          '</div>';
+      }
+
+      function renderCloudDisabled() {
+        root.innerHTML =
+          '<div class="cloud-disabled-note">' +
+            'Il sistema utenti non è configurato. Apri <code>js/config.js</code> e inserisci le credenziali Supabase.' +
+          '</div>';
+      }
+
+      async function renderProfile() {
+        const [progress, unlocked] = await Promise.all([
+          window.cloud.listAllProgress(),
+          window.cloud.listAchievements(),
+        ]);
+
+        const completed = progress.filter(p => p.done && p.result === "win");
+        const failed = progress.filter(p => p.done && p.result === "lose");
+        const flawless = completed.filter(p => p.mistakes === 0);
+
+        const unlockedMap = {};
+        unlocked.forEach(a => { unlockedMap[a.achievement_id] = a.unlocked_at; });
+
+        const username = window.cloud.profile ? window.cloud.profile.username : "";
+
+        let achHtml = "";
+        window.ACHIEVEMENTS.forEach(a => {
+          const isUnlocked = !!unlockedMap[a.id];
+          const dateStr = isUnlocked
+            ? new Date(unlockedMap[a.id]).toLocaleDateString("it-IT")
+            : "";
+          achHtml +=
+            '<div class="achievement ' + (isUnlocked ? "" : "locked") + '">' +
+              '<div class="icon">' + a.icon + '</div>' +
+              '<div class="ach-title">' + escapeHtml(a.title) + '</div>' +
+              '<div class="ach-desc">' + escapeHtml(a.desc) + '</div>' +
+              (isUnlocked ? '<div class="ach-date">Sbloccato il ' + dateStr + '</div>' : '') +
+            '</div>';
+        });
+
+        root.innerHTML =
+          '<section class="profile-summary">' +
+            '<h2>' + escapeHtml(username) + '</h2>' +
+            '<p style="color:var(--muted);margin:0;">Il tuo profilo</p>' +
+            '<div class="stats">' +
+              '<div><strong>' + completed.length + '</strong>vinti</div>' +
+              '<div><strong>' + failed.length + '</strong>persi</div>' +
+              '<div><strong>' + flawless.length + '</strong>senza errori</div>' +
+              '<div><strong>' + unlocked.length + '/' + window.ACHIEVEMENTS.length + '</strong>achievement</div>' +
+            '</div>' +
+          '</section>' +
+          '<h3 style="font-family:var(--font-display);margin:24px 0 8px;">Achievement</h3>' +
+          '<div class="achievements-grid">' + achHtml + '</div>';
+      }
+
+      function bootProfile() {
+        if (!window.cloud || !window.cloud.ready) {
+          renderCloudDisabled();
+          return;
+        }
+        if (!window.cloud.user) {
+          renderNotLoggedIn();
+          return;
+        }
+        renderProfile();
+      }
+
+      // Wait until auth state is settled (initial call fires synchronously with null,
+      // then real session resolves). Re-render whenever auth changes.
+      let firstResolved = false;
+      window.cloud.onAuthChange(() => {
+        if (firstResolved && window.cloud.user) {
+          renderProfile();
+        } else if (firstResolved) {
+          renderNotLoggedIn();
+        }
+        firstResolved = true;
+      });
+      // Initial paint after a small delay (let session refresh complete)
+      setTimeout(bootProfile, 350);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Local-only environment files (if you ever add any)
+.env
+.env.local
+.env.*.local
+
+# Node (in case you ever add tooling)
+node_modules/
+npm-debug.log*
+
+# OS
+Thumbs.db

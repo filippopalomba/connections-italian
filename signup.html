@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrati — Connessioni Italiane</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Connessioni Italiane</a>
+    <nav>
+      <a href="index.html">Oggi</a>
+      <a href="archive.html">Archivio</a>
+    </nav>
+    <div id="user-area"></div>
+  </header>
+
+  <main class="container">
+    <div id="cloud-note"></div>
+
+    <div class="auth-card">
+      <h2>Crea un account</h2>
+      <form id="signup-form">
+        <div class="form-row">
+          <label for="signup-username">Username</label>
+          <input type="text" id="signup-username" name="username" autocomplete="username" pattern="[A-Za-z0-9_]{3,24}" minlength="3" maxlength="24" required />
+        </div>
+        <div class="form-row">
+          <label for="signup-password">Password (min 6 caratteri)</label>
+          <input type="password" id="signup-password" name="password" autocomplete="new-password" minlength="6" required />
+        </div>
+        <div class="form-row">
+          <label for="signup-password2">Conferma password</label>
+          <input type="password" id="signup-password2" name="password2" autocomplete="new-password" minlength="6" required />
+        </div>
+        <div class="form-error" id="signup-error"></div>
+        <button type="submit" class="btn primary">Registrati</button>
+      </form>
+      <p class="auth-alt">
+        Hai già un account? <a href="login.html">Accedi</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <strong>Disclaimer.</strong> Sito indipendente, non affiliato al New York Times o al gioco "Connections".
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    if (!window.cloud || !window.cloud.ready) {
+      document.getElementById("cloud-note").innerHTML =
+        '<div class="cloud-disabled-note">' +
+          'La registrazione non è ancora configurata. Apri <code>js/config.js</code> e inserisci le credenziali Supabase.' +
+        '</div>';
+    } else {
+      window.bindSignupForm("signup-form", "signup-error");
+    }
+  </script>
+</body>
+</html>
